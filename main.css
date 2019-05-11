@@ -1,0 +1,187 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+
+/*
+/
+/   END RESET CSS
+/
+*/
+
+/*
+  Make sure to test about with the tablet to mobile sizes to see which one fits the best and looks the nicest
+*/
+html, body {
+  font-family: "Lucida Grande", "Lucida Sans Unicode";
+  height: calc(100vh - 3px);
+  width: 100vw;
+}
+
+h1 {
+  font-size: 72px;
+  letter-spacing: 5px;
+}
+
+h2 {
+  font-size: 48px;
+  letter-spacing: 3px;
+}
+
+h3 {
+  font-size: 32px;
+  letter-spacing: 2px;
+}
+
+h4 {
+  font-size: 26px;
+  letter-spacing: 1.6px;
+}
+
+p {
+  font-size: 22px;
+  letter-spacing: 1px;
+}
+
+
+.container {
+  height: 100vh;
+  width: 100vh;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr 150px;
+  grid-template-rows: 1fr 70px;
+  grid-template-areas: 
+    ". about project ."
+    ". contact contact .";
+}
+
+.about {
+  grid-area: about;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+.pic {
+  background: yellow;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  border: 2px solid black;
+  box-shadow: 5px 5px 10px rgba(63, 21, 21, 0.5);
+}
+
+.projects {
+  grid-area: project;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.project {
+  width: 60%;
+  height: 50%;
+  display: none;
+  border: black 1px solid;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(63, 21, 21, 0.5);
+}
+
+.project-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40%;
+  border-bottom: 1px solid black;
+}
+
+.project-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60%;
+  text-align: center;
+}
+
+.project-content p {
+  margin: 15px;
+}
+
+.selected {
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  width: 75%;
+  text-align: center;
+  font-size: 30px;
+}
+
+
+.contact {
+  grid-area: contact;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hidden {
+  opacity: 0;
+}
