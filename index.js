@@ -3,7 +3,7 @@ const DOWN_ARROW_ID = 'down-arrow';
 const SELECTED_CLASS = 'selected';
 const ARROW_CLASS = 'arrow';
 
-let allProjects = document.querySelectorAll(".project");
+let allProjectsArray = Array.prototype.slice.call(document.querySelectorAll(".project"));
 
 
 document.addEventListener('click', (clickEvent) => {
@@ -14,34 +14,66 @@ document.addEventListener('click', (clickEvent) => {
 
 function arrowClickHandler(clickedArrow) {
   if(clickedArrow.id === UP_ARROW_ID) {
-    changeSelectedProject(-1)
+    const changedProjects = determineChangesSelectedProjects(-1);
+    selectionChangedProjectsHandler(changedProjects);
   } else {
-    changeSelectedProject(1)
+    const changedProjects = determineChangesSelectedProjects(1);
+    selectionChangedProjectsHandler(changedProjects);
   }
 }
 
-function changeSelectedProject(amountChanged) {
-
-  for(let i = 0; i < allProjects.length; i++) {
-    if(allProjects[i].classList.contains(SELECTED_CLASS)) {
-      if(i + amountChanged < allProjects.length && i + amountChanged >= 0) {
-        projectSelectedChangeHandler(allProjects[i], allProjects[i + amountChanged], i + amountChanged)
-        break;
+function determineChangesSelectedProjects(amountChanged) {
+  for(let i = 0; i < allProjectsArray.length; i++) {
+    if(allProjectsArray[i].classList.contains(SELECTED_CLASS)) {
+      if(i + amountChanged < allProjectsArray.length && i + amountChanged >= 0) {
+        return {
+          previousProject: allProjectsArray[i],
+          selectedProject: allProjectsArray[i + amountChanged],
+          direction: amountChanged,
+          change: true,
+        }  
       }
     }
   }
+
+  return { 
+    previousProject: null,
+    selectedProject: null,
+    direction: null,
+    change: false,
+  }
 }
 
-function projectSelectedChangeHandler(selectedProject, nextSelectedProject, nextSelectedProjectIndex) {
-  selectedProject.classList.remove(SELECTED_CLASS);
-  nextSelectedProject.classList.add(SELECTED_CLASS);
-  determineArrowVisibility(nextSelectedProjectIndex);
+function selectionChangedProjectsHandler(changedProjectsObject) {
+
+    let { previousProject, selectedProject, direction, change } = changedProjectsObject;
+
+    if(change != false) {
+    //handle selected project
+    //remove all classes but project! add last-selected
+    previousProject.classList = "project";
+    previousProject.classList.add('last-selected');
+    //handle next selected project
+    //remove all classes but project! Add either top-selected or bottom-selected
+    selectedProject.classList = "project";
+    selectedProject.classList.add('selected');
+    if(direction === 1) {
+      selectedProject.classList.add('top-selected');
+    } else {
+      selectedProject.classList.add('bottom-selected');
+    }
+    
+    //handle other stuff such as checking arrow visibility
+    determineArrowVisibility(selectedProject);
+  }
 }
 
-function determineArrowVisibility(projectIndex) {
-  if(projectIndex === 0) {
+function determineArrowVisibility(selectedProject) {
+  const selectedProjectIndex = allProjectsArray.indexOf(selectedProject);
+
+  if(selectedProjectIndex === 0) {
     document.querySelector(`#${UP_ARROW_ID}`).classList.add('hidden');
-  } else if(projectIndex === allProjects.length - 1) {
+  } else if(selectedProjectIndex === allProjectsArray.length - 1) {
     document.querySelector(`#${DOWN_ARROW_ID}`).classList.add('hidden');
   } else {
     document.querySelector(`#${DOWN_ARROW_ID}`).classList.remove('hidden');

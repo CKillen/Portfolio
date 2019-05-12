@@ -118,12 +118,43 @@ p {
 }
 
 .pic {
-  background: yellow;
+  background: url('/Users/chrisk/Work/Portfolio/s2cU5%a%RQeZYPfpyisLnQ_thumb_7d0.jpg') no-repeat;
+  background-size: 450px 450px;
   width: 450px;
   height: 450px;
   border-radius: 50%;
   border: 2px solid black;
   box-shadow: 5px 5px 10px rgba(63, 21, 21, 0.5);
+}
+
+.pic-text {
+  position: absolute;
+  height: 350px;
+  width: 200px;
+  transform: translate(65%, 50%);
+  color: rgb(255, 255, 255);
+  opacity: 0;
+  transition: 2s all;
+  z-index: 20;
+}
+
+.pic::after {
+  content: "";
+  position: absolute;
+  background: rgba(0, 0, 0, 0);
+  width: 450px;
+  height: 450px;
+  transform: translate(-50%, -2px);
+  border-radius: 50%;
+  transition: 2s all;
+}
+
+.pic:hover:after {
+  background: rgba(0, 0, 0, 0.671);
+}
+
+.pic:hover .pic-text {
+  opacity: 1;
 }
 
 .projects {
@@ -135,12 +166,69 @@ p {
 }
 
 .project {
-  width: 60%;
-  height: 50%;
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: none;
   border: black 1px solid;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(63, 21, 21, 0.5);
+}
+
+.last-selected {
+  display: flex;
+  flex-direction: column;
+  animation: offScreen 1s forwards;
+}
+
+.top-selected {
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  transition: .5s all ease;
+  animation: topScreen 2s none;
+}
+
+.bottom-selected {
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  transition: .5s all ease;
+  animation: bottomScreen 2s none;
+}
+
+.selected {
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  transition: .5s all ease;
+}
+
+.project-section {
+  position: relative;
+  width: 60%;
+  height: 50%;
+}
+
+.project-section:hover .selected{
+  transform: rotateY(180deg);
+}
+
+.front {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  backface-visibility: hidden;
+  background: pink;
+  border-radius: 10px;
+  transform: rotateY(180deg);
 }
 
 .project-title {
@@ -163,15 +251,11 @@ p {
   margin: 15px;
 }
 
-.selected {
-  display: flex;
-  flex-direction: column;
-}
-
 .arrow {
   width: 75%;
   text-align: center;
   font-size: 30px;
+  transition: 1s opacity ease-in-out;
 }
 
 
@@ -182,6 +266,45 @@ p {
   justify-content: center;
 }
 
+.contact:hover h4 {
+  animation: contactBounce 2s infinite;
+}
+
 .hidden {
   opacity: 0;
+}
+
+.arrow:hover:not(.hidden) {
+  opacity: 0.5;
+}
+
+@keyframes contactBounce {
+  0% { transform: translateY(0px) }
+  25% { transform: translateY(-15px) }
+  50% { transform: translateY(0px) }
+  75% { transform: translateY(-15px) }
+  100% { transform: translateY(0px) }
+}
+
+@keyframes topScreen {
+  0% {transform: translateY(-500px)}
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes bottomScreen {
+  0% {transform: translateY(500px)}
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes offScreen {
+  0% {transform: scale(1)}
+  100% {
+    transform: scale(0);
+    opacity: 1;
+  }
 }
