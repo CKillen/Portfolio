@@ -433,6 +433,12 @@ input:focus {
 }
 
 @media only screen and (max-width: 1200px) {
+  .small-learn {
+    display: block;
+    text-align: center;
+    color: rgb(99, 104, 170);
+    text-decoration: none;
+  }
   .content {
     height: 100%;
     width: 100%;
@@ -481,12 +487,12 @@ input:focus {
     width: 100%;
     display: grid;
     grid-template-columns: 25px 1fr 25px;
-    grid-template-rows: 15px 700px auto 700px;
+    grid-template-rows: 15px 700px 700px auto;
     grid-template-areas: 
       ". . ."
       ". about ."
-      ". contact ."
-      ". project .";
+      ". project ."
+      ". contact .";
   }
   .pic {
     background-size: 320px 320px;
@@ -532,12 +538,12 @@ input:focus {
     width: 100%;
     display: grid;
     grid-template-columns: 5px 1fr 5px;
-    grid-template-rows: 15px 700px auto 700px;
+    grid-template-rows: 15px 700px 700px auto;
     grid-template-areas: 
       ". . ."
       ". about ."
-      ". contact ."
-      ". project .";
+      ". project ."
+      ". contact .";
   }
   .pic {
     background-size: 300px 300px;

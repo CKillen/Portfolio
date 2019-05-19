@@ -20,7 +20,9 @@ document.addEventListener('click', (clickEvent) => {
   }
   
   if(clickEvent.target.classList.contains('pic-click')) {
-    window.open('https://christopherkillen.blog/index.php/2019/01/29/about-blog-and-me/');
+    if(window.innerWidth > 1200) {
+      window.open('https://christopherkillen.blog/index.php/2019/01/29/about-blog-and-me/');
+    }
   }
 });
 
