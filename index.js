@@ -11,41 +11,43 @@ document.addEventListener('click', (clickEvent) => {
   if(clickEvent.target.classList.contains(ARROW_CLASS)) {
     arrowClickHandler(clickEvent.target);
   }
-  if(clickEvent.target.classList.contains(CONTACT_CLASS) || clickEvent.target.parentElement.classList.contains(CONTACT_CLASS)) {
-    contactAnimationHandler();
-  }
-
-  if(clickEvent.target.classList.contains('main-page-link') || clickEvent.target.parentElement.classList.contains('main-page-link')){
-    mainpageAnimationHandler();
-  }
   
   if(clickEvent.target.classList.contains('pic-click')) {
     if(window.innerWidth > 1200) {
       window.open('https://christopherkillen.blog/index.php/2019/01/29/about-blog-and-me/');
     }
   }
+
+  if(clickEvent.target.classList.contains('project-touch')) {
+    console.log(clickEvent.target)
+    let selectedCard = document.querySelector('.selected');
+    selectedCard.classList.toggle('flip');
+  }
+
 });
 
-function mainpageAnimationHandler() {
-  let contentElement = document.querySelector('.content');
-  let contactForm = document.querySelector('.contact-form')
+document.addEventListener('touchstart', (touchEvent) => {
+  if(touchEvent.target.classList.contains(ARROW_CLASS)) {
+    arrowClickHandler(touchEvent.target);
+  }
 
-  contactForm.classList = 'contact-form contact-hide'
+  if(touchEvent.target.classList.contains('pic-click')) {
+    if(window.innerWidth > 1200) {
+      window.open('https://christopherkillen.blog/index.php/2019/01/29/about-blog-and-me/');
+    }
+  }
 
-  contentElement.classList = 'content show';
+  if(touchEvent.target.classList.contains('project-touch')) {
+    console.log(touchEvent.target)
+    let selectedCard = document.querySelector('.selected');
+    if(selectedCard.classList.contains('back-flip')) {
+      selectedCard.classList.remove('back-flip');
+    } else {
+      selectedCard.classList.add('back-flip');
+    }
+  }
+});
 
-
-
-}
-
-function contactAnimationHandler() {
-  let contentElement = document.querySelector('.content');
-  let contactForm = document.querySelector('.contact-form')
-
-  contentElement.classList = 'content hide';
-  contactForm.classList = 'contact-form contact-show';
-
-}
 
 function arrowClickHandler(clickedArrow) {
   if(clickedArrow.id === UP_ARROW_ID) {
