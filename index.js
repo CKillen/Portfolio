@@ -18,6 +18,10 @@ document.addEventListener('click', (clickEvent) => {
   if(clickEvent.target.classList.contains('main-page-link') || clickEvent.target.parentElement.classList.contains('main-page-link')){
     mainpageAnimationHandler();
   }
+  
+  if(clickEvent.target.classList.contains('pic-click')) {
+    window.open('https://christopherkillen.blog/index.php/2019/01/29/about-blog-and-me/');
+  }
 });
 
 function mainpageAnimationHandler() {

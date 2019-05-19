@@ -239,7 +239,7 @@ p {
   height: 50%;
 }
 
-.project-section:hover .selected{
+.project-section:hover .selected, .project-section:active .selected{
   transform: rotateY(180deg);
 }
 
@@ -250,6 +250,7 @@ p {
   backface-visibility: hidden;
   background: rgb(255, 255, 255);
   border-radius: 10px;
+  overflow: scroll;
 }
 
 .back {
@@ -264,6 +265,7 @@ p {
   border-radius: 10px;
   transform: rotateY(180deg);
   text-align: center;
+  overflow: scroll;
 }
 
 .back-text {
@@ -336,22 +338,6 @@ p {
   animation: offScreen 1s forwards;
 }
 
-.contact-form {
-  height: 100vh;
-  width: 100vh;
-  display: none;
-}
-
-.contact-form2 {
-  height: 100vh;
-  width: 100vh;
-
-}
-
-.contact-section {
-  grid-area: contact-form;
-}
-
 .main-page-link {
   grid-area: main-page;
   display: flex;
@@ -361,34 +347,6 @@ p {
 
 .main-page-link:hover h4 {
   animation: contactBounce 2s infinite;
-}
-
-.show {
-  animation: onScreenNoDelay 2s forwards;
-}
-
-.contact-show {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 150px 1fr 150px;
-  grid-template-rows: 1fr 70px;
-  grid-template-areas: 
-    ". contact-form ."
-    ". main-page .";
-  animation: onScreen50Delay 2s forwards;
-}
-
-.contact-hide {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 150px 1fr 150px;
-  grid-template-rows: 1fr 70px;
-  grid-template-areas: 
-    ". contact-form ."
-    ". main-page .";
-  animation: offScreen 2s forwards;
 }
 
 input {
@@ -419,35 +377,31 @@ input:focus {
   box-shadow: 0px 0px 2px 2px rgba(99, 104, 170, 0.5);
 }
 
-.contact-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+.email-link {
+  text-decoration: none;
+  color: black;
 }
 
-.email-section {
-  width: 100%;
+.greyed {
+  color: grey;
+  cursor: default;
+}
+
+.site {
+  border: 1px solid #24292e;;
+  height: 56px;
+  width: 66px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-}
-
-button {
-  margin-top: 15px;
-  font-size: 22px;
-  height: 40px;
-  width: 120px;
-  border: 1px solid rgba(99, 104, 170, 0.175);
+  text-decoration: none;
   border-radius: 10px;
-  background: rgb(203, 205, 235);
-  transition: 2s background;
+  background: rgba(99, 104, 170, 0.5);
+  
 }
 
-button:hover {
-  background: rgba(203, 205, 235, .5);
-  box-shadow: 0px 0px 2px 2px rgba(99, 104, 170, 0.5);
+.small-learn {
+  display: none;
 }
 
 @keyframes contactBounce {
@@ -478,14 +432,150 @@ button:hover {
   100% { transform: scale(0); height: 0; width: 0; }
 }
 
-
-@keyframes onScreen50Delay {
-  0% {transform: scale(0)}
-  50% {transform: scale(0)}
-  100% { transform: scale(1); height: 100%; width: 100%; }
+@media only screen and (max-width: 1200px) {
+  .content {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25px 1fr 1fr 25px;
+    grid-template-rows: 1fr 70px;
+    grid-template-areas: 
+      ". about project ."
+      ". contact contact .";
+  }
+  .pic {
+    background-size: 320px 320px;
+    width: 320px;
+    height: 320px;
+  }
+  .pic-text {
+    display: none;
+    transition: none;
+  }
+  .pic:hover:after {
+    background: none;
+  }
+  
+  .pic:hover .pic-text {
+    opacity: 0;
+  }
+  .projects {
+    grid-area: project;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .arrow {
+    margin: 35px 0px;
+  }
+  .pic::after {
+    width: 0px;
+    height: 0px;
+  }
 }
 
-@keyframes onScreenNoDelay {
-  0% {transform: scale(0)}
-  100% { transform: scale(1); height: 100%; width: 100%; }
+@media only screen and (max-width: 767px) {
+  .content {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 25px 1fr 25px;
+    grid-template-rows: 15px 700px auto 700px;
+    grid-template-areas: 
+      ". . ."
+      ". about ."
+      ". contact ."
+      ". project .";
+  }
+  .pic {
+    background-size: 320px 320px;
+    width: 320px;
+    height: 320px;
+  }
+  .pic-text {
+    display: none;
+    transition: none;
+  }
+  .pic:hover:after {
+    background: none;
+  }
+  
+  .pic:hover .pic-text {
+    opacity: 0;
+  }
+  .projects {
+    grid-area: project;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .arrow {
+    margin: 35px 0px;
+  }
+  .contact {
+    grid-area: contact;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .email-link {
+    color: rgb(99, 104, 170);
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .content {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 5px 1fr 5px;
+    grid-template-rows: 15px 700px auto 700px;
+    grid-template-areas: 
+      ". . ."
+      ". about ."
+      ". contact ."
+      ". project .";
+  }
+  .pic {
+    background-size: 300px 300px;
+    width: 300px;
+    height: 300px;
+  }
+  .pic-text {
+    display: none;
+    transition: none;
+  }
+  .pic:hover:after {
+    background: none;
+  }
+  
+  .pic:hover .pic-text {
+    opacity: 0;
+  }
+  .projects {
+    grid-area: project;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .arrow {
+    margin: 35px 0px;
+  }
+  .contact {
+    grid-area: contact;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .email-link {
+    color: rgb(99, 104, 170);
+  }
+  .pic::after {
+    width: 0px;
+    height: 0px;
+  }
 }
